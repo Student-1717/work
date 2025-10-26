@@ -1,9 +1,11 @@
 name: Daily Commit Workflow
 
 on:
+  # Daily schedule
   schedule:
-    # Runs every day at 07:30 UTC
     - cron: '30 7 * * *'
+  # Manual trigger for testing
+  workflow_dispatch:
 
 jobs:
   daily-commit:
