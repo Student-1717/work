@@ -1,11 +1,9 @@
 name: Daily Commit Workflow
 
 on:
-  # Daily schedule
   schedule:
-    - cron: '30 7 * * *'
-  # Manual trigger for testing
-  workflow_dispatch:
+    - cron: '30 7 * * *'   # daily at 07:30 UTC
+  workflow_dispatch:        # manual trigger
 
 jobs:
   daily-commit:
@@ -22,7 +20,8 @@ jobs:
 
       - name: Create a daily commit for email 24f2005754@ds.study.iitm.ac.in
         run: |
-          echo "Daily update $(date)" >> daily_commit.txt
-          git add daily_commit.txt
-          git commit -m "Daily commit from GitHub Action"
+          FILE=daily_commit.txt
+          echo "Daily update $(date '+%Y-%m-%d %H:%M:%S')" >> $FILE
+          git add $FILE
+          git commit -m "Daily commit from GitHub Action at $(date '+%Y-%m-%d %H:%M:%S')"
           git push
